@@ -2,19 +2,19 @@
   "options": {
     "bases": [
       {
-        "id": 1,
+        "id": 101,
         "name": "NY Style",
         "size": "25 cm",
         "price": 8.99
       },
       {
-        "id": 2,
+        "id": 102,
         "name": "NY Style",
         "size": "30 cm",
         "price": 11.49
       },
       {
-        "id": 3,
+        "id": 103,
         "name": "NY Style",
         "size": "35 cm",
         "price": 13.49
@@ -22,17 +22,17 @@
     ],
     "sauces": [
         {
-          "id": 1,
+          "id": 201,
           "name": "White sauce",
           "price": 0.00
         },
         {
-          "id": 2,
+          "id": 202,
           "name": "Red sauce",
           "price": 1.00
         },
         {
-          "id": 3,
+          "id": 203,
           "name": "Mix it up",
           "price": 1.50
         }
