@@ -14,18 +14,34 @@ function Configurator(props) {
     <Grid container spacing={16} direction="column" justify="center" alignItems="center">
       <Grid item>
         <Typography>CHOOSE YOUR PIZZA INGREDIENTS</Typography>
+      </Grid>
+      <Grid item>
+        <FormControl component="fieldset" className={classes.formControl}>
+          <FormLabel component="legend">Pizza base</FormLabel>
+            <RadioGroup
+              aria-label="base"
+              name="base"
+              className={classes.group}
+              value={props.baseValue.toString()}
+              onChange={props.handleChange}
+              > 
+              {props.baseOptions.map(base => <FormControlLabel key={base.id} value={base.id.toString()} control={<Radio />} label={`${base.name} - ${base.size} - ${base.price}`} />)}
+            </RadioGroup>
+        </FormControl>
+      </Grid>
+      <Grid item>
           <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend">Pizza base</FormLabel>
+            <FormLabel component="legend">Sauces</FormLabel>
               <RadioGroup
-                aria-label="base"
-                name="base"
+                aria-label="sauce"
+                name="sauce"
                 className={classes.group}
-                value={props.baseValue.toString()}
+                value={props.sauceValue.toString()}
                 onChange={props.handleChange}
                 > 
-                {props.baseOptions.map(base => <FormControlLabel key={base.id} value={base.id.toString()} control={<Radio />} label={`${base.name} - ${base.size} - ${base.price}`} />)}
+                {props.sauceOptions.map(sauce => <FormControlLabel key={sauce.id} value={sauce.id.toString()} control={<Radio />} label={`${sauce.name} - ${sauce.price}`} />)}
               </RadioGroup>
-              </FormControl>
+            </FormControl>
       </Grid>
     </Grid>
   )

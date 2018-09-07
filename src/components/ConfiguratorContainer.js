@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {loadOptions} from '../actions/options'
+import {updateChosen} from '../actions/chosen'
 import Configurator from './Configurator'
 
 class ConfiguratorContainer extends React.PureComponent {
@@ -20,6 +21,7 @@ class ConfiguratorContainer extends React.PureComponent {
 
   componentDidUpdate() {
     console.log(this.state)
+    this.props.updateChosen(this.state)
   }
 
 
@@ -33,6 +35,8 @@ class ConfiguratorContainer extends React.PureComponent {
         toppingOptions={this.props.options.toppings}
         handleChange={this.handleChange}
         baseValue={this.state.base}
+        sauceValue={this.state.sauce}
+        toppingsValue={this.state.toppings}
         />
     )
   }
@@ -52,4 +56,4 @@ const mapStateToProps = (state) => {
 
 // proptypes!
 
-export default connect(mapStateToProps, {loadOptions})(ConfiguratorContainer)
+export default connect(mapStateToProps, {loadOptions, updateChosen})(ConfiguratorContainer)

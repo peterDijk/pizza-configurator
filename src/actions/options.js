@@ -3,7 +3,6 @@ import jsonOptions from '../pizza-options.json'
 export const OPTIONS_LOADED = 'OPTIONS_LOADED'
 
 
-
 function optionsLoaded(options) {
   return {
     type: OPTIONS_LOADED,
