@@ -1,9 +1,9 @@
 import {UPDATE_CHOSEN} from '../actions/chosen'
 
 const initialState = {
-  base: null,
-  sauce: null,
-  toppings: null
+  base: 0,
+  sauce: 0,
+  toppings: []
 }
 
 export default (state = initialState, action = {}) => {

@@ -14,6 +14,7 @@ function Configurator(props) {
     <Grid container spacing={16} direction="column" justify="center" alignItems="center">
       <Grid item>
         <Typography>CHOOSE YOUR PIZZA INGREDIENTS</Typography>
+        <Typography>Total price: {props.totalPrice}</Typography>
       </Grid>
       <Grid item>
         <FormControl component="fieldset" className={classes.formControl}>
