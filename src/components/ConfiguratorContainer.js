@@ -8,9 +8,9 @@ class ConfiguratorContainer extends React.PureComponent {
   state = {
     base: 0,
     sauce: 0,
-    toppings: {},
     turboDelivery: false,
-    total: 0.00
+    total: 0.00,
+    toppings: {}
   }
 
   handleChange = event => {
@@ -27,14 +27,10 @@ class ConfiguratorContainer extends React.PureComponent {
   }
 
   handleToppingsChange = name => event => {
-    const toppings = Object.keys(this.state.toppings)
-    const chosenToppings = toppings.filter(topping => this.state.toppings[topping] === true )
-   
       this.setState({ 
         ...this.state, 
         toppings: {...this.state.toppings, [name]: event.target.checked }
       })
-    
   }
 
   calculateTotal = () => {
@@ -84,9 +80,12 @@ class ConfiguratorContainer extends React.PureComponent {
     if (Object.keys(this.state.toppings).length !== 0) {
       this.calculateTotal() // only executes after toppings are loaded otherwise it overwrites line 46 setState
     }
-    this.props.updateChosen({
-      ...this.state
-    })
+
+    const toppings = Object.keys(this.state.toppings)
+    const chosenToppings = toppings.filter(topping => this.state.toppings[topping] === true )
+    const forRedux = {...this.state, chosenToppings}
+    delete forRedux.toppings
+    this.props.updateChosen(forRedux)
   }
 
   render() {

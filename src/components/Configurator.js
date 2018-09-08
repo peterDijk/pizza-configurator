@@ -123,7 +123,7 @@ const styles = theme => ({
     margin: `${theme.spacing.unit}px 0`,
   },
   expansionPanel: {
-    width: 350
+    width: '80vw'
   }
 })
 
