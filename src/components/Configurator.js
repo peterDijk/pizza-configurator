@@ -2,7 +2,6 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import ConfiguratorBase from './ConfiguratorBase'
 import ConfiguratorHeader from './ConfiguratorHeader'
@@ -18,10 +17,19 @@ function Configurator(props) {
       <Grid item>
         <Grid container spacing={16} direction="row" justify="center" alignItems="center">
           <Grid item>
-            <ConfiguratorHeader {...props} />
+            <Card className={classes.headerCards}>
+              <CardContent>
+                <ConfiguratorHeader {...props} />
+              </CardContent>
+            </Card>
           </Grid>
           <Grid item>
-            {(props.selectedToppings.length > 0 && <ConfiguratorDelivery {...props} />)}
+            <Card className={classes.headerCards}>
+              <CardContent>
+                {(props.selectedToppings.length > 0 && <ConfiguratorDelivery {...props} />)}
+                {(!props.selectedToppings.length > 0 && <img src="/favicon.ico" alt="" />)}
+              </CardContent>
+            </Card>
           </Grid>
         </Grid>
       </Grid>
@@ -44,7 +52,7 @@ const styles = theme => ({
     display: 'flex',
   },
   formControl: {
-    margin: theme.spacing.unit * 3,
+    margin: theme.spacing.unit * 0,
   },
   group: {
     margin: `${theme.spacing.unit}px 0`,
@@ -54,6 +62,13 @@ const styles = theme => ({
   },
   topText: {
     marginTop: 20
+  },
+  headerCards: {
+    width: 350,
+    height: 100,
+    marginTop: 20,
+    margin: 'auto'
+    // padding: 0
   }
 })
 
