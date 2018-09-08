@@ -67,6 +67,20 @@ function Configurator(props) {
               </FormGroup>
             </FormControl>
       </Grid>
+
+      <Grid item>
+          <FormControl component="fieldset" className={classes.formControl}>
+            <FormLabel component="legend">Turbo Drone Delivery</FormLabel>
+            <FormGroup > 
+              <FormControlLabel
+                control={
+                <Checkbox checked={props.turboDelivery} name="turboDelivery" value="turboDelivery" onChange={props.handleChange} />
+                }
+                label="Yes please"
+                />
+              </FormGroup>
+            </FormControl>
+      </Grid>
     </Grid>
   )
 }

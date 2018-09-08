@@ -9,13 +9,20 @@ class ConfiguratorContainer extends React.PureComponent {
     base: 0,
     sauce: 0,
     toppings: {},
+    turboDelivery: false,
     total: 0.00
   }
 
   handleChange = event => {
+    let value
+    if (event.target.name === 'turboDelivery') {
+      value = event.target.checked
+    } else {
+      value = parseInt(event.target.value, 0)
+    }
     this.setState({ 
       ...this.state, 
-      [event.target.name]: parseInt(event.target.value, 0) 
+      [event.target.name]: value 
     })
   }
 
@@ -41,8 +48,10 @@ class ConfiguratorContainer extends React.PureComponent {
       const chosenToppings = toppings.filter(topping => this.state.toppings[topping] === true )
       total += (chosenToppings.length * 0.5)
     }
-
-
+    if (this.state.turboDelivery === true) {
+      total += ((total / 100) * 10)
+    }
+    total = total.round(2)
 
     this.setState({...this.state, total})
   }
@@ -89,6 +98,7 @@ class ConfiguratorContainer extends React.PureComponent {
         sauceValue={this.state.sauce}
         toppingsValue={this.state.toppings}
         totalPrice={this.state.total}
+        turboDelivery={this.state.turboDelivery}
         />
     )
   }
