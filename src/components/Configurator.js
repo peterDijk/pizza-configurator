@@ -10,6 +10,11 @@ import FormGroup from '@material-ui/core/FormGroup'
 import Radio from '@material-ui/core/Radio'
 import Checkbox from '@material-ui/core/Checkbox'
 
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 function Configurator(props) {
   const { classes } = props
   return (
@@ -19,8 +24,13 @@ function Configurator(props) {
         <Typography>Total price: {props.totalPrice}</Typography>
       </Grid>
       <Grid item>
+      <ExpansionPanel defaultExpanded={true} className={classes.expansionPanel}>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+        <Typography className={classes.heading}>Pizza base</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
         <FormControl component="fieldset" className={classes.formControl}>
-          <FormLabel component="legend">Pizza base</FormLabel>
+          <FormLabel component="legend" />
             <RadioGroup
               aria-label="base"
               name="base"
@@ -31,11 +41,18 @@ function Configurator(props) {
               {props.baseOptions.map(base => <FormControlLabel key={base.id} value={base.id.toString()} control={<Radio />} label={`${base.name} - ${base.size} - ${base.price}`} />)}
             </RadioGroup>
         </FormControl>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
       </Grid>
 
       <Grid item>
+      <ExpansionPanel className={classes.expansionPanel} >
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+        <Typography className={classes.heading}>Sauces</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
           <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend">Sauces</FormLabel>
+            <FormLabel component="legend" />
               <RadioGroup
                 aria-label="sauce"
                 name="sauce"
@@ -47,12 +64,19 @@ function Configurator(props) {
                 {props.sauceOptions.map(sauce => <FormControlLabel key={sauce.id} value={sauce.id.toString()} control={<Radio />} label={`${sauce.name} - ${sauce.price}`} />)}
               </RadioGroup>
             </FormControl>
+            </ExpansionPanelDetails>
+      </ExpansionPanel>
       </Grid>
 
       <Grid item>
+      <ExpansionPanel className={classes.expansionPanel}>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+        <Typography className={classes.heading}>Toppings</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
           <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend">Toppings</FormLabel>
-            <FormGroup > 
+            <FormLabel component="legend"/>
+            <FormGroup>
                 {props.toppingOptions.map(topping => {
                   return (
                     <FormControlLabel
@@ -66,6 +90,8 @@ function Configurator(props) {
                 })}
               </FormGroup>
             </FormControl>
+            </ExpansionPanelDetails>
+      </ExpansionPanel>
       </Grid>
 
       <Grid item>
@@ -96,6 +122,9 @@ const styles = theme => ({
   group: {
     margin: `${theme.spacing.unit}px 0`,
   },
+  expansionPanel: {
+    width: 350
+  }
 })
 
 export default withStyles(styles)(Configurator)

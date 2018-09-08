@@ -27,10 +27,14 @@ class ConfiguratorContainer extends React.PureComponent {
   }
 
   handleToppingsChange = name => event => {
-    this.setState({ 
-      ...this.state, 
-      toppings: {...this.state.toppings, [name]: event.target.checked }
-    })
+    const toppings = Object.keys(this.state.toppings)
+    const chosenToppings = toppings.filter(topping => this.state.toppings[topping] === true )
+   
+      this.setState({ 
+        ...this.state, 
+        toppings: {...this.state.toppings, [name]: event.target.checked }
+      })
+    
   }
 
   calculateTotal = () => {
