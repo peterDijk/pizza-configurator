@@ -10,7 +10,14 @@ function Configurator(props) {
   return (
     <Grid container spacing={16} direction="column" justify="center" alignItems="center">
       <Grid item>
-        <ConfiguratorHeader {...props} />
+        <Grid container spacing={16} direction="row" justify="center" alignItems="center">
+          <Grid item>
+            <ConfiguratorHeader {...props} />
+          </Grid>
+          <Grid item>
+            {(props.selectedToppings.length > 0 && <ConfiguratorDelivery {...props} />)}
+          </Grid>
+        </Grid>
       </Grid>
       <Grid item>
         <ConfiguratorBase {...props} />
@@ -21,9 +28,7 @@ function Configurator(props) {
       <Grid item>
         {(props.selectedSauce && <ConfiguratorToppings {...props} />)}
       </Grid>
-      <Grid item>
-        {(props.selectedToppings.length > 0 && <ConfiguratorDelivery {...props} />)}
-        </Grid>
+
     </Grid>
   )
 }

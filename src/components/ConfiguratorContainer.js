@@ -63,10 +63,13 @@ class ConfiguratorContainer extends React.PureComponent {
     this.setState({...this.state, total})
   }
 
-  toppingsDisabled = () => {
+  chosenToppingsToArray = () => {
     const toppings = Object.keys(this.state.toppings)
-    const chosenToppings = toppings.filter(topping => this.state.toppings[topping] === true )
-    if (chosenToppings.length === 3) {
+    return toppings.filter(topping => this.state.toppings[topping] === true )
+  }
+
+  toppingsDisabled = () => {
+    if (this.chosenToppingsToArray().length === 3) {
       return true
     } else {
       return false
@@ -99,8 +102,7 @@ class ConfiguratorContainer extends React.PureComponent {
       this.calculateTotal() // only executes after toppings are loaded otherwise it overwrites toppings setState
     }
 
-    const toppings = Object.keys(this.state.toppings)
-    const chosenToppings = toppings.filter(topping => this.state.toppings[topping] === true )
+    const chosenToppings = this.chosenToppingsToArray()
     
     const forRedux = {...this.state, chosenToppings}
     delete forRedux.toppings
@@ -110,8 +112,7 @@ class ConfiguratorContainer extends React.PureComponent {
 
   render() {
     if (!this.props.options) return 'Loading...'
-    const toppings = Object.keys(this.state.toppings)
-    const chosenToppings = toppings.filter(topping => this.state.toppings[topping] === true )
+    
     return (
       <Configurator 
         baseOptions={this.props.options.bases} 
@@ -127,7 +128,7 @@ class ConfiguratorContainer extends React.PureComponent {
         toppingsDisabled={this.toppingsDisabled()}
         selectedBase={this.props.options.bases.find(base => base.id === this.state.base)}
         selectedSauce={this.props.options.sauces.find(sauce => sauce.id === this.state.sauce)}
-        selectedToppings={chosenToppings}
+        selectedToppings={this.chosenToppingsToArray()}
         handleExpansionChange={this.handleExpansionChange}
         expanded={this.state.expanded}
         />
