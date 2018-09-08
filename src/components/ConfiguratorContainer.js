@@ -56,10 +56,22 @@ class ConfiguratorContainer extends React.PureComponent {
     this.setState({...this.state, total})
   }
 
+  toppingsDisabled = () => {
+    const toppings = Object.keys(this.state.toppings)
+    const chosenToppings = toppings.filter(topping => this.state.toppings[topping] === true )
+    if (chosenToppings.length === 3) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   componentDidMount = () => {
     this.props.loadOptions()
   }
 
+  
+  
   componentDidUpdate = () => {
     if (this.props.options && this.props.options.toppings.length !== 0 && Object.keys(this.state.toppings).length === 0) {
       // load all toppings in this.state: object with toppings as keys, values false. Checkbox sets to true
@@ -78,11 +90,13 @@ class ConfiguratorContainer extends React.PureComponent {
     }
     
     if (Object.keys(this.state.toppings).length !== 0) {
-      this.calculateTotal() // only executes after toppings are loaded otherwise it overwrites line 46 setState
+      this.calculateTotal() // only executes after toppings are loaded otherwise it overwrites toppings setState
     }
 
     const toppings = Object.keys(this.state.toppings)
     const chosenToppings = toppings.filter(topping => this.state.toppings[topping] === true )
+
+
     const forRedux = {...this.state, chosenToppings}
     delete forRedux.toppings
     this.props.updateChosen(forRedux)
@@ -90,6 +104,7 @@ class ConfiguratorContainer extends React.PureComponent {
 
   render() {
     if (!this.props.options) return 'Loading...'
+    console.log(this.toppingsDisabled())
     return (
       <Configurator 
         baseOptions={this.props.options.bases} 
@@ -102,10 +117,10 @@ class ConfiguratorContainer extends React.PureComponent {
         toppingsValue={this.state.toppings}
         totalPrice={this.state.total}
         turboDelivery={this.state.turboDelivery}
+        toppingsDisabled={this.toppingsDisabled()}
         />
     )
   }
-
 }
 
 const mapStateToProps = (state) => {
@@ -113,7 +128,5 @@ const mapStateToProps = (state) => {
     options: state.options
   }
 }
-
-// proptypes!
 
 export default connect(mapStateToProps, {loadOptions, updateChosen})(ConfiguratorContainer)
