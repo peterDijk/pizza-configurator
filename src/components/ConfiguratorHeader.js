@@ -30,7 +30,7 @@ const styles = theme => ({
     width: '80vw'
   },
   topText: {
-    marginTop: 20
+    // marginTop: 20
   }
 })
 

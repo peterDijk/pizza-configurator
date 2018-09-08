@@ -1,12 +1,18 @@
 import React from 'react'
+import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
 import ConfiguratorBase from './ConfiguratorBase'
 import ConfiguratorHeader from './ConfiguratorHeader'
 import ConfiguratorSauce from './ConfiguratorSauce'
 import ConfiguratorToppings from './ConfiguratorToppings'
 import ConfiguratorDelivery from './ConfiguratorDelivery'
 
+
 function Configurator(props) {
+  const { classes } = props
   return (
     <Grid container spacing={16} direction="column" justify="center" alignItems="center">
       <Grid item>
@@ -33,4 +39,22 @@ function Configurator(props) {
   )
 }
 
-export default Configurator
+const styles = theme => ({
+  root: {
+    display: 'flex',
+  },
+  formControl: {
+    margin: theme.spacing.unit * 3,
+  },
+  group: {
+    margin: `${theme.spacing.unit}px 0`,
+  },
+  expansionPanel: {
+    width: '80vw'
+  },
+  topText: {
+    marginTop: 20
+  }
+})
+
+export default withStyles(styles)(Configurator)
