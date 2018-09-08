@@ -51,7 +51,7 @@ class ConfiguratorContainer extends React.PureComponent {
     if (this.state.turboDelivery === true) {
       total += ((total / 100) * 10)
     }
-    total = total.round(2)
+    total = total.toFixed(2)
 
     this.setState({...this.state, total})
   }
