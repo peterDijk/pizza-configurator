@@ -26,7 +26,7 @@ function Configurator(props) {
       <Grid item>
       <ExpansionPanel defaultExpanded={true} className={classes.expansionPanel}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography className={classes.heading}>Pizza base</Typography>
+        <Typography className={classes.heading}>Pizza base {(props.selectedBase) ? `- ${props.selectedBase.name} ${props.selectedBase.size}` : ''}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
         <FormControl component="fieldset" className={classes.formControl}>
@@ -48,7 +48,7 @@ function Configurator(props) {
       <Grid item>
       <ExpansionPanel className={classes.expansionPanel} >
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography className={classes.heading}>Sauces</Typography>
+        <Typography className={classes.heading}>Sauces {(props.selectedSauce) ? `- ${props.selectedSauce.name}` : ''}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <FormControl component="fieldset" className={classes.formControl}>
@@ -61,7 +61,7 @@ function Configurator(props) {
                 onChange={props.handleChange}
                 
                 > 
-                {props.sauceOptions.map(sauce => <FormControlLabel key={sauce.id} value={sauce.id.toString()} control={<Radio />} label={`${sauce.name} - ${sauce.price}`} />)}
+                {props.sauceOptions.map(sauce => <FormControlLabel key={sauce.id} value={sauce.id.toString()} control={<Radio />} label={`${sauce.name} - ${sauce.price.toFixed(2)}`} />)}
               </RadioGroup>
             </FormControl>
             </ExpansionPanelDetails>
@@ -71,12 +71,13 @@ function Configurator(props) {
       <Grid item>
       <ExpansionPanel className={classes.expansionPanel}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-        <Typography className={classes.heading}>Toppings</Typography>
+        <Typography className={classes.heading}>Toppings {(props.selectedToppings) ? props.selectedToppings.map(topping => `- ${topping} `) : ''}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <FormControl component="fieldset" className={classes.formControl}>
             <FormLabel component="legend"/>
             <FormGroup>
+              <Typography>(3 max - 0,50 each)</Typography>
                 {props.toppingOptions.map(topping => {
                   return (
                     <FormControlLabel
