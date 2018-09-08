@@ -13,7 +13,17 @@ class ConfiguratorContainer extends React.PureComponent {
   }
 
   handleChange = event => {
-    this.setState({ ...this.state, [event.target.name]: parseInt(event.target.value, 0) })
+    this.setState({ 
+      ...this.state, 
+      [event.target.name]: parseInt(event.target.value, 0) 
+    })
+  }
+
+  handleToppingsChange = name => event => {
+    this.setState({ 
+      ...this.state, 
+      toppings: {...this.state.toppings, [name]: event.target.checked }
+    })
   }
 
   calculateTotal = () => {
@@ -26,6 +36,14 @@ class ConfiguratorContainer extends React.PureComponent {
       const sauce = this.props.options.sauces.find(sauce => sauce.id === this.state.sauce)
       total += sauce.price
     }
+    if (Object.keys(this.state.toppings).length > 0) {
+      const toppings = Object.keys(this.state.toppings)
+      const chosenToppings = toppings.filter(topping => this.state.toppings[topping] === true )
+      total += (chosenToppings.length * 0.5)
+    }
+
+
+
     this.setState({...this.state, total})
   }
 
@@ -51,17 +69,14 @@ class ConfiguratorContainer extends React.PureComponent {
     }
     
     if (Object.keys(this.state.toppings).length !== 0) {
-      this.calculateTotal() // overwrites previous setState because it's not updated yet after that setState
+      this.calculateTotal() // only executes after toppings are loaded otherwise it overwrites line 46 setState
     }
     this.props.updateChosen({
       ...this.state
     })
   }
 
-
-
   render() {
-    console.log(this.state)
     if (!this.props.options) return 'Loading...'
     return (
       <Configurator 
@@ -69,6 +84,7 @@ class ConfiguratorContainer extends React.PureComponent {
         sauceOptions={this.props.options.sauces}
         toppingOptions={this.props.options.toppings}
         handleChange={this.handleChange}
+        handleToppingsChange={this.handleToppingsChange}
         baseValue={this.state.base}
         sauceValue={this.state.sauce}
         toppingsValue={this.state.toppings}

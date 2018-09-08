@@ -58,7 +58,7 @@ function Configurator(props) {
                     <FormControlLabel
                       key={topping}
                       control={
-                      <Checkbox checked={false} value={topping} />
+                      <Checkbox checked={props.toppingsValue[topping]} value={topping} onChange={props.handleToppingsChange(topping)} />
                       }
                       label={topping}
                       />
