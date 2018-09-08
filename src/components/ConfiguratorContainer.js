@@ -93,7 +93,6 @@ class ConfiguratorContainer extends React.PureComponent {
         ...this.state,
         toppings: toppingsObj
       })
-      
     }
     
     if (Object.keys(this.state.toppings).length !== 0) {
@@ -103,7 +102,6 @@ class ConfiguratorContainer extends React.PureComponent {
     const toppings = Object.keys(this.state.toppings)
     const chosenToppings = toppings.filter(topping => this.state.toppings[topping] === true )
     
-
     const forRedux = {...this.state, chosenToppings}
     delete forRedux.toppings
     delete forRedux.expanded
