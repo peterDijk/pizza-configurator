@@ -69,7 +69,7 @@ class ConfiguratorContainer extends React.PureComponent {
   }
 
   toppingsDisabled = () => {
-    if (this.chosenToppingsToArray().length === 3) {
+    if (this.chosenToppingsToArray().length > 2) {
       return true
     } else {
       return false
