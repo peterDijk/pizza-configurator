@@ -12,7 +12,6 @@ function optionsLoaded(options) {
 
 export function loadOptions() {
   return function (dispatch) {
-    
     // dispatch setup for possible later async db fetch
     dispatch(optionsLoaded(jsonOptions.options))
   }

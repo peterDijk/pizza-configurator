@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography'
 import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormLabel from '@material-ui/core/FormLabel'
+import FormHelperText from '@material-ui/core/FormHelperText'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormGroup from '@material-ui/core/FormGroup'
 import Radio from '@material-ui/core/Radio'
@@ -20,7 +21,7 @@ function Configurator(props) {
   return (
     <Grid container spacing={16} direction="column" justify="center" alignItems="center">
       <Grid item>
-        <Typography>CHOOSE YOUR PIZZA INGREDIENTS</Typography>
+        <Typography className={classes.topText}>CHOOSE YOUR PIZZA INGREDIENTS</Typography>
         <Typography>Total price: {props.totalPrice}</Typography>
       </Grid>
       <Grid item>
@@ -74,10 +75,10 @@ function Configurator(props) {
         <Typography className={classes.heading}>Toppings {(props.selectedToppings) ? props.selectedToppings.map(topping => `- ${topping} `) : ''}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <FormControl component="fieldset" className={classes.formControl}>
+        <FormControl component="fieldset" className={classes.formControl}>
             <FormLabel component="legend"/>
             <FormGroup>
-              <Typography>(3 max - 0,50 each)</Typography>
+              
                 {props.toppingOptions.map(topping => {
                   return (
                     <FormControlLabel
@@ -95,6 +96,7 @@ function Configurator(props) {
                   )  
                 })}
               </FormGroup>
+              <FormHelperText>(3 max - 0,50 each)</FormHelperText>
             </FormControl>
             </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -102,7 +104,7 @@ function Configurator(props) {
 
       <Grid item>
           <FormControl component="fieldset" className={classes.formControl}>
-            <FormLabel component="legend">Turbo Drone Delivery</FormLabel>
+            <FormLabel component="legend">Turbo Drone Delivery (+ 10%)</FormLabel>
             <FormGroup > 
               <FormControlLabel
                 control={
@@ -130,6 +132,9 @@ const styles = theme => ({
   },
   expansionPanel: {
     width: '80vw'
+  },
+  topText: {
+    marginTop: 20
   }
 })
 
