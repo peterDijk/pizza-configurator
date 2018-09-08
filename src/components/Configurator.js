@@ -68,7 +68,6 @@ const styles = theme => ({
     height: 100,
     marginTop: 20,
     margin: 'auto'
-    // padding: 0
   }
 })
 
