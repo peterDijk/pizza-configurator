@@ -24,7 +24,7 @@ function Configurator(props) {
         <Typography>Total price: {props.totalPrice}</Typography>
       </Grid>
       <Grid item>
-      <ExpansionPanel defaultExpanded={true} className={classes.expansionPanel}>
+      <ExpansionPanel className={classes.expansionPanel} expanded={props.expanded === 'panel1'} onChange={props.handleExpansionChange('panel1')}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
         <Typography className={classes.heading}>Pizza base {(props.selectedBase) ? `- ${props.selectedBase.name} ${props.selectedBase.size}` : ''}</Typography>
         </ExpansionPanelSummary>
@@ -46,7 +46,7 @@ function Configurator(props) {
       </Grid>
 
       <Grid item>
-      <ExpansionPanel className={classes.expansionPanel} >
+      <ExpansionPanel className={classes.expansionPanel} expanded={props.expanded === 'panel2'} onChange={props.handleExpansionChange('panel2')}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
         <Typography className={classes.heading}>Sauces {(props.selectedSauce) ? `- ${props.selectedSauce.name}` : ''}</Typography>
         </ExpansionPanelSummary>
@@ -69,7 +69,7 @@ function Configurator(props) {
       </Grid>
 
       <Grid item>
-      <ExpansionPanel className={classes.expansionPanel}>
+      <ExpansionPanel className={classes.expansionPanel} expanded={props.expanded === 'panel3'} onChange={props.handleExpansionChange('panel3')}>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
         <Typography className={classes.heading}>Toppings {(props.selectedToppings) ? props.selectedToppings.map(topping => `- ${topping} `) : ''}</Typography>
         </ExpansionPanelSummary>

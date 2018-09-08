@@ -10,7 +10,8 @@ class ConfiguratorContainer extends React.PureComponent {
     sauce: 0,
     turboDelivery: false,
     total: 0.00,
-    toppings: {}
+    toppings: {},
+    expanded: 'panel1'
   }
 
   handleChange = event => {
@@ -31,6 +32,12 @@ class ConfiguratorContainer extends React.PureComponent {
         ...this.state, 
         toppings: {...this.state.toppings, [name]: event.target.checked }
       })
+  }
+
+  handleExpansionChange = panel => (event, expanded) => {
+    this.setState({
+      expanded: expanded ? panel : false,
+    })
   }
 
   calculateTotal = () => {
@@ -99,6 +106,7 @@ class ConfiguratorContainer extends React.PureComponent {
 
     const forRedux = {...this.state, chosenToppings}
     delete forRedux.toppings
+    delete forRedux.expanded
     this.props.updateChosen(forRedux)
   }
 
@@ -122,6 +130,8 @@ class ConfiguratorContainer extends React.PureComponent {
         selectedBase={this.props.options.bases.find(base => base.id === this.state.base)}
         selectedSauce={this.props.options.sauces.find(sauce => sauce.id === this.state.sauce)}
         selectedToppings={chosenToppings}
+        handleExpansionChange={this.handleExpansionChange}
+        expanded={this.state.expanded}
         />
     )
   }
