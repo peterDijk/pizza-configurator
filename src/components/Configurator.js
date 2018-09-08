@@ -6,7 +6,9 @@ import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormLabel from '@material-ui/core/FormLabel'
 import RadioGroup from '@material-ui/core/RadioGroup'
+import FormGroup from '@material-ui/core/FormGroup'
 import Radio from '@material-ui/core/Radio'
+import Checkbox from '@material-ui/core/Checkbox'
 
 function Configurator(props) {
   const { classes } = props
@@ -30,6 +32,7 @@ function Configurator(props) {
             </RadioGroup>
         </FormControl>
       </Grid>
+
       <Grid item>
           <FormControl component="fieldset" className={classes.formControl}>
             <FormLabel component="legend">Sauces</FormLabel>
@@ -39,9 +42,29 @@ function Configurator(props) {
                 className={classes.group}
                 value={props.sauceValue.toString()}
                 onChange={props.handleChange}
+                
                 > 
                 {props.sauceOptions.map(sauce => <FormControlLabel key={sauce.id} value={sauce.id.toString()} control={<Radio />} label={`${sauce.name} - ${sauce.price}`} />)}
               </RadioGroup>
+            </FormControl>
+      </Grid>
+
+      <Grid item>
+          <FormControl component="fieldset" className={classes.formControl}>
+            <FormLabel component="legend">Toppings</FormLabel>
+            <FormGroup > 
+                {props.toppingOptions.map(topping => {
+                  return (
+                    <FormControlLabel
+                      key={topping}
+                      control={
+                      <Checkbox checked={false} value={topping} />
+                      }
+                      label={topping}
+                      />
+                  )  
+                })}
+              </FormGroup>
             </FormControl>
       </Grid>
     </Grid>

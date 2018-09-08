@@ -3,7 +3,7 @@ import {UPDATE_CHOSEN} from '../actions/chosen'
 const initialState = {
   base: 0,
   sauce: 0,
-  toppings: []
+  toppings: {}
 }
 
 export default (state = initialState, action = {}) => {

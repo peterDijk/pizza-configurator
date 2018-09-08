@@ -8,19 +8,12 @@ class ConfiguratorContainer extends React.PureComponent {
   state = {
     base: 0,
     sauce: 0,
-    toppings: [],
+    toppings: {},
     total: 0.00
   }
 
   handleChange = event => {
     this.setState({ ...this.state, [event.target.name]: parseInt(event.target.value, 0) })
-    
-    this.props.updateChosen({
-      ...this.state, 
-      [event.target.name]:parseInt(event.target.value, 0),
-      // total: 
-      
-    })
   }
 
   calculateTotal = () => {
@@ -36,21 +29,39 @@ class ConfiguratorContainer extends React.PureComponent {
     this.setState({...this.state, total})
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.props.loadOptions()
-    // load all toppings in this.state: object with toppings as keys, values false. Checkbox sets to true
   }
 
-  componentDidUpdate() {
-      this.calculateTotal()
-      this.props.updateChosen({
-        ...this.state
+  componentDidUpdate = () => {
+    if (this.props.options && this.props.options.toppings.length !== 0 && Object.keys(this.state.toppings).length === 0) {
+      // load all toppings in this.state: object with toppings as keys, values false. Checkbox sets to true
+      let toppingsObj = {}
+      this.props.options.toppings.forEach(topping => {
+        toppingsObj = {
+          ...toppingsObj,
+          [topping]: false
+        }
       })
+      this.setState({
+        ...this.state,
+        toppings: toppingsObj
+      })
+      
+    }
+    
+    if (Object.keys(this.state.toppings).length !== 0) {
+      this.calculateTotal() // overwrites previous setState because it's not updated yet after that setState
+    }
+    this.props.updateChosen({
+      ...this.state
+    })
   }
 
 
 
   render() {
+    console.log(this.state)
     if (!this.props.options) return 'Loading...'
     return (
       <Configurator 
@@ -70,8 +81,7 @@ class ConfiguratorContainer extends React.PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    options: state.options,
-    // chosen: state.chosen
+    options: state.options
   }
 }
 
