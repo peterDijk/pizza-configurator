@@ -13,18 +13,24 @@ class ConfiguratorContainer extends React.PureComponent {
   }
 
   handleChange = event => {
-    this.setState({ [event.target.name]: parseInt(event.target.value, 0) })
-    this.props.updateChosen({ ...this.state, [event.target.name]:parseInt(event.target.value, 0) })
+    this.setState({ ...this.state, [event.target.name]: parseInt(event.target.value, 0) })
+    
+    this.props.updateChosen({
+      ...this.state, 
+      [event.target.name]:parseInt(event.target.value, 0),
+      // total: 
+      
+    })
   }
 
   calculateTotal = () => {
     let total = 0
-    if (this.props.chosen.base !== 0) {
-      const base = this.props.options.bases.find(base => base.id === this.props.chosen.base)
+    if (this.state.base !== 0) {
+      const base = this.props.options.bases.find(base => base.id === this.state.base)
       total += base.price
     }
-    if (this.props.chosen.sauce !== 0) {
-      const sauce = this.props.options.sauces.find(sauce => sauce.id === this.props.chosen.sauce)
+    if (this.state.sauce !== 0) {
+      const sauce = this.props.options.sauces.find(sauce => sauce.id === this.state.sauce)
       total += sauce.price
     }
     this.setState({...this.state, total})
@@ -36,9 +42,10 @@ class ConfiguratorContainer extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    if (this.state.base !== 0) {
       this.calculateTotal()
-    }
+      this.props.updateChosen({
+        ...this.state
+      })
   }
 
 
@@ -64,7 +71,7 @@ class ConfiguratorContainer extends React.PureComponent {
 const mapStateToProps = (state) => {
   return {
     options: state.options,
-    chosen: state.chosen
+    // chosen: state.chosen
   }
 }
 
